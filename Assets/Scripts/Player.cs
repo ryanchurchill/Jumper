@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     // config
     [SerializeField] float MovementSpeed = 1.0f;
+    [SerializeField] float JumpForce = 5.0f; // temp!
 
     // cached components
     Rigidbody2D myRigidBody;
@@ -14,21 +15,19 @@ public class Player : MonoBehaviour
     void Start()
     {
         myRigidBody = GetComponent<Rigidbody2D>();
-
-        StartMoving();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 playerVelocity = new Vector2(0, MovementSpeed);
+        Vector2 playerVelocity = new Vector2(myRigidBody.velocity.x, MovementSpeed);
         myRigidBody.velocity = playerVelocity;
     }
 
-    void StartMoving()
+    public void Jump()
     {
-    //    Vector2 playerVelocity = new Vector2(0, MovementSpeed);
-    //    myRigidBody.velocity = playerVelocity;
-        //myRigidBody.AddForce(new Vector2(0, MovementSpeed));
+        print("jump");
+        Vector2 playerVelocity = new Vector2(-JumpForce, myRigidBody.velocity.y);
+        myRigidBody.velocity = playerVelocity;
     }
 }
