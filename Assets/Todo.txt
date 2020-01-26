@@ -1,0 +1,18 @@
+﻿Hazards
+- can walk on top of them?
+- Moving hazards? (e.g. chainsaws coming atcha)
+
+Death
+- and flow of game
+
+Pickups
+
+SFX
+
+Jumping Animation
+
+Procedurally generated
+
+Speed increase?
+
+Intro "video" demo
