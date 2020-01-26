@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     // config
     [SerializeField] float MovementSpeed = 1.0f;
-    [SerializeField] float JumpForce = 5.0f; // temp!
+    //[SerializeField] float JumpForce = 5.0f; // temp!
 
     // cached components
     Rigidbody2D myRigidBody;
@@ -24,9 +24,8 @@ public class Player : MonoBehaviour
         myRigidBody.velocity = playerVelocity;
     }
 
-    public void Jump()
+    public void Jump(float JumpForce)
     {
-        print("jump");
         Vector2 playerVelocity = new Vector2(-JumpForce, myRigidBody.velocity.y);
         myRigidBody.velocity = playerVelocity;
     }

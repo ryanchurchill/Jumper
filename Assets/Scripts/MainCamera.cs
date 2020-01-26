@@ -22,6 +22,5 @@ public class MainCamera : MonoBehaviour
         Vector3 cameraPosition = transform.position;
         cameraPosition.y = player.transform.position.y - playerStartingY;
         transform.position = cameraPosition;
-        print(cameraPosition);
     }
 }
