@@ -10,8 +10,10 @@ public class GameSession : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] float scorePerSecond = 1.0f;
     [SerializeField] int updateDisplayAfterMs = 1000;
+    [SerializeField] Player player;
 
-    // other
+    // state
+    bool isPlayerAlive = true;
     float score = 0;
     DateTime timeOfLastScoreDisplayUpdate = DateTime.Now;
 
@@ -24,7 +26,10 @@ public class GameSession : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        IncreaseScore(scorePerSecond * Time.deltaTime);
+        if (isPlayerAlive)
+        {
+            IncreaseScore(scorePerSecond * Time.deltaTime);
+        }
     }
 
     void IncreaseScore(float pointsToAdd)
@@ -42,5 +47,10 @@ public class GameSession : MonoBehaviour
             scoreText.text = String.Format("{0:#,###0}", score);
         }
         
+    }
+
+    public void PlayerDied()
+    {
+        isPlayerAlive = false;
     }
 }

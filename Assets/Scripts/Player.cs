@@ -6,17 +6,20 @@ public class Player : MonoBehaviour
 {
     // config
     [SerializeField] float MovementSpeed = 1.0f;
+    [SerializeField] GameSession gameSession;
 
     // state
     bool isAlive = true;
 
     // cached components
     Rigidbody2D myRigidBody;
+    Animator myAnimator;
 
     // Start is called before the first frame update
     void Start()
     {
         myRigidBody = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -24,9 +27,14 @@ public class Player : MonoBehaviour
     {
         if (isAlive)
         {
-            Vector2 playerVelocity = new Vector2(myRigidBody.velocity.x, MovementSpeed);
-            myRigidBody.velocity = playerVelocity;
+            MoveForward();
         }
+    }
+
+    private void MoveForward()
+    {
+        Vector2 playerVelocity = new Vector2(myRigidBody.velocity.x, MovementSpeed);
+        myRigidBody.velocity = playerVelocity;
     }
 
     public void Jump(float JumpForce)
@@ -47,5 +55,12 @@ public class Player : MonoBehaviour
     {
         Debug.Log("die");
         isAlive = false;
+        gameSession.PlayerDied();
+
+        myAnimator.enabled = false; // is there a better way?
+        myRigidBody.freezeRotation = false;
+        myRigidBody.AddForce(new Vector2(-300, -200));
+        myRigidBody.AddTorque(10);
+        
     }
 }
