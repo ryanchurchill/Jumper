@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameSession : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] float scorePerSecond = 1.0f;
     [SerializeField] int updateDisplayAfterMs = 1000;
     [SerializeField] Player player;
+    [SerializeField] GameObject deathPanel;
 
     // state
     bool isPlayerAlive = true;
@@ -20,7 +22,7 @@ public class GameSession : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        deathPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -52,5 +54,11 @@ public class GameSession : MonoBehaviour
     public void PlayerDied()
     {
         isPlayerAlive = false;
+        deathPanel.SetActive(true);
+    }
+
+    public void PlayAgain()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
