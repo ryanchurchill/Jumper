@@ -16,3 +16,14 @@ Procedurally generated
 Speed increase?
 
 Intro "video" demo
+
+
+
+
+
+
+Hello! I absolutely loved this course, and now I'm working on my own (very simple) game.
+
+Let's say you have a tile with spikes on the left and right, so that it's a hazard to touch the spikes, but you can still jump onto the top. But then you have another tile with spikes on the top and bottom, but not the sides, for example.
+
+Is there a recommended approach for defining *parts* of a tile as a hazard, instead of an all-or-none-approach like we did here with the spikes and water?
