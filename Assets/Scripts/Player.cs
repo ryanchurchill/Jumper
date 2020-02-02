@@ -48,6 +48,13 @@ public class Player : MonoBehaviour
         if (collision.tag == Constants.TAG_HAZARD)
         {
             Die();
+        } else
+        {
+            Powerup powerup = collision.GetComponent<Powerup>();
+            if (powerup)
+            {
+                powerup.CollectPowerup(this);
+            }
         }
     }
 

@@ -5,5 +5,7 @@ using UnityEngine;
 public class Constants
 {
     public const string TAG_HAZARD = "Hazard";
+    public const string TAG_POWERUP = "Powerup"; // maybe not needed
+
     //public const string ANIMATION_TRIGGER_PLAYER_DIED = "Died";
 }

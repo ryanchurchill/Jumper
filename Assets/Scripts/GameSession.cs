@@ -22,6 +22,7 @@ public class GameSession : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        UpdateScoreDisplay();
         deathPanel.SetActive(false);
     }
 
@@ -34,9 +35,9 @@ public class GameSession : MonoBehaviour
         }
     }
 
-    void IncreaseScore(float pointsToAdd)
+    public void IncreaseScore(float pointsToAdd, bool forceDisplayUpdate = false)
     {
-        UpdateScore(score + pointsToAdd);
+        UpdateScore(score + pointsToAdd, forceDisplayUpdate);
     }
 
     void UpdateScore(float newScore, bool forceDisplayUpdate = false)
@@ -45,10 +46,15 @@ public class GameSession : MonoBehaviour
 
         if (forceDisplayUpdate || DateTime.Now.Subtract(timeOfLastScoreDisplayUpdate).TotalMilliseconds > updateDisplayAfterMs)
         {
-            timeOfLastScoreDisplayUpdate = DateTime.Now;
-            scoreText.text = String.Format("{0:#,###0}", score);
+            UpdateScoreDisplay();
         }
-        
+
+    }
+
+    private void UpdateScoreDisplay()
+    {
+        timeOfLastScoreDisplayUpdate = DateTime.Now;
+        scoreText.text = String.Format("{0:#,###0}", score);
     }
 
     public void PlayerDied()

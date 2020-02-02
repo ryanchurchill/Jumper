@@ -2,6 +2,8 @@
 - can walk on top of them?
 - Moving hazards? (e.g. chainsaws coming atcha)
 
+Maybe: Multiple stories
+
 Death
 - and flow of game
 
@@ -17,9 +19,13 @@ Speed increase?
 
 Intro "video" demo
 
+When bar is full, force jump
 
+Some kind of wall to prevent infinite jumping
 
+Player animation might be a tad janky, possibly due to how sprite is set up
 
+Change player color while preparing jump
 
 
 Hello! I absolutely loved this course, and now I'm working on my own (very simple) game.
