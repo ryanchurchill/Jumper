@@ -5,15 +5,16 @@ using UnityEngine;
 public class LevelSegment : MonoBehaviour
 {
     const float SegmentSize = 15;
-    bool hasSpawnedNextSegment = false;
+    bool HasSpawnedNextSegment = false;
+    LevelSegment PriorSegment;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Player player = collision.GetComponent<Player>();
-        if (player && !hasSpawnedNextSegment)
+        if (player && !HasSpawnedNextSegment)
         {
             //Debug.Log("player collision with Segment");
-            Instantiate(
+            LevelSegment newSegment = Instantiate(
                 this,
                 new Vector2(
                     this.transform.position.x,
@@ -21,8 +22,20 @@ public class LevelSegment : MonoBehaviour
                 ),
                 Quaternion.identity
             );
+            newSegment.PriorSegment = this;
 
-            hasSpawnedNextSegment = true;
+
+            HasSpawnedNextSegment = true;
+
+            if (PriorSegment)
+            {
+                LevelSegment twoSegmentsAgo = PriorSegment.PriorSegment;
+                if (twoSegmentsAgo)
+                {
+                    Debug.Log("destroy segment");
+                    Destroy(twoSegmentsAgo.gameObject);
+                }
+            }
         }
 
     }
