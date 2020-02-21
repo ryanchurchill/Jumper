@@ -45,9 +45,10 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == Constants.TAG_HAZARD)
+        Hazard hazard = collision.GetComponent<Hazard>();
+        if (hazard)
         {
-            Die();
+            Die(hazard.DeathForce);
         } else
         {
             Powerup powerup = collision.GetComponent<Powerup>();
@@ -58,7 +59,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Die()
+    private void Die(Vector2 deathForce)
     {
         Debug.Log("die");
         isAlive = false;
@@ -66,7 +67,7 @@ public class Player : MonoBehaviour
 
         myAnimator.enabled = false; // is there a better way?
         myRigidBody.freezeRotation = false;
-        myRigidBody.AddForce(new Vector2(-300, -200));
+        myRigidBody.AddForce(deathForce);
         myRigidBody.AddTorque(10);
         
     }
