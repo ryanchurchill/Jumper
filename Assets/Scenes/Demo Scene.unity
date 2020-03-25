@@ -2362,6 +2362,26 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1791963377 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4985921197554337239, guid: 06b58c746617dcd4b938b6b01e64f2d4,
+    type: 3}
+  m_PrefabInstance: {fileID: 4985921198981109529}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1791963378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791963377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98ae29d94792b9c4e9644d158352b862, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 3
+  speed: 1
 --- !u!1 &1894960634
 GameObject:
   m_ObjectHideFlags: 0
@@ -2473,12 +2493,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1894960634}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75dd6a8e44e67b448b55974b6f098dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed: 1.2
+  MovementSpeed: 1.5
   gameSession: {fileID: 691140707}
 --- !u!50 &1894960639
 Rigidbody2D:
@@ -3033,6 +3053,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 4985921197554337238, guid: 06b58c746617dcd4b938b6b01e64f2d4,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4985921197554337239, guid: 06b58c746617dcd4b938b6b01e64f2d4,
         type: 3}
