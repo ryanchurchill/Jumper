@@ -13,6 +13,7 @@ public class MovingObject : MonoBehaviour
     // state
     Vector2 initialPosition;
     Vector2 endPosition;
+    Vector2 myVelocity = Vector2.zero;
 
     // cached components
     Rigidbody2D myRigidBody;
@@ -22,35 +23,21 @@ public class MovingObject : MonoBehaviour
     {
         myRigidBody = GetComponent<Rigidbody2D>();
         initialPosition = transform.position;
+        endPosition = new Vector2(transform.position.x, transform.position.y - 3);
     }
 
     // Update is called once per frame
     void Update()
     {
-        long x = 0;
-        long y = 0;
-
-        switch (direction)
-        {
-            case Direction.North:
-                y = speed;
-                break;
-            case Direction.South:
-                y = -speed;
-                break;
-            case Direction.East:
-                x = speed;
-                break;
-            case Direction.West:
-                x = -speed;
-                break;
-        }
-
-        Vector2 newVolocity = new Vector2(x, y);
-        myRigidBody.velocity = newVolocity;
+        transform.position = Vector2.SmoothDamp(transform.position, endPosition, ref myVelocity, 1f);
+        flipIfTraveledToLength();
     }
 
     private void flipIfTraveledToLength()
     {
+        if (myVelocity.x <= Mathf.Epsilon && myVelocity.y <= Mathf.Epsilon)
+        {
+            endPosition = new Vector2(transform.position.x, transform.position.y + 3);
+        }
     }
 }
