@@ -2308,6 +2308,10 @@ MonoBehaviour:
   direction: 0
   length: 10
   speed: 1
+  initialPosition: {x: 0, y: 0}
+  endPosition: {x: 0, y: 0}
+  myVelocity: {x: 0, y: 0}
+  headingToEndElseStart: 1
 --- !u!1 &1679979578
 GameObject:
   m_ObjectHideFlags: 0
@@ -2410,7 +2414,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1791963377}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98ae29d94792b9c4e9644d158352b862, type: 3}
   m_Name: 
@@ -2529,7 +2533,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1894960634}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75dd6a8e44e67b448b55974b6f098dca, type: 3}
   m_Name: 

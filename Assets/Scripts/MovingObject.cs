@@ -11,9 +11,10 @@ public class MovingObject : MonoBehaviour
     [SerializeField] long speed = 1;
 
     // state
-    Vector2 initialPosition;
-    Vector2 endPosition;
-    Vector2 myVelocity = Vector2.zero;
+    [SerializeField] Vector2 initialPosition;
+    [SerializeField] Vector2 endPosition;
+    [SerializeField] Vector2 myVelocity = Vector2.zero;
+    [SerializeField] bool headingToEndElseStart = true;
 
     // cached components
     Rigidbody2D myRigidBody;
@@ -29,15 +30,23 @@ public class MovingObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector2.SmoothDamp(transform.position, endPosition, ref myVelocity, 1f);
-        flipIfTraveledToLength();
+        transform.position = Vector2.SmoothDamp(
+            transform.position, getCurrentDestination(), ref myVelocity, 1f);
+        flipIfAtDestination();
     }
 
-    private void flipIfTraveledToLength()
+    private void flipIfAtDestination()
     {
-        if (myVelocity.x <= Mathf.Epsilon && myVelocity.y <= Mathf.Epsilon)
+        Vector2 destinationPosition = getCurrentDestination();
+
+        if (Vector2.Distance(transform.position, destinationPosition) <= .1)
         {
-            endPosition = new Vector2(transform.position.x, transform.position.y + 3);
+            headingToEndElseStart = !headingToEndElseStart;
         }
+    }
+
+    private Vector2 getCurrentDestination()
+    {
+        return headingToEndElseStart ? endPosition : initialPosition;
     }
 }

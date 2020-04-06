@@ -1,4 +1,6 @@
-﻿Hazards
+Resolution: Iphone7 (750x1334)
+
+Hazards
 - can walk on top of them?
 - Moving hazards? (e.g. chainsaws coming atcha)
 
