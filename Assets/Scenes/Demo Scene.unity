@@ -2302,12 +2302,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1524115819}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2741c0367e57db4f852b46169d86b85, type: 3}
+  m_Script: {fileID: 11500000, guid: 111bb06aa3f5cd74b906b5c3f936f2b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
-  length: 10
-  speed: 1
+  length: 2
+  speed: 100
   initialPosition: {x: 0, y: 0}
   endPosition: {x: 0, y: 0}
   myVelocity: {x: 0, y: 0}

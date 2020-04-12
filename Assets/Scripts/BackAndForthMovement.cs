@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// rename to back-and-forth
-public class MovingObject : MonoBehaviour
+public class BackAndForthMovement : MonoBehaviour
 {
     // config
     [SerializeField] Direction direction = Direction.North;
@@ -24,14 +23,14 @@ public class MovingObject : MonoBehaviour
     {
         myRigidBody = GetComponent<Rigidbody2D>();
         initialPosition = transform.position;
-        endPosition = new Vector2(transform.position.x, transform.position.y - 3);
+        setEndPosition();
     }
 
-    // Update is called once per frame
+    // TODO: spring movement sucks
     void Update()
     {
         transform.position = Vector2.SmoothDamp(
-            transform.position, getCurrentDestination(), ref myVelocity, 1f);
+            transform.position, getCurrentDestination(), ref myVelocity, 1f, speed);
         flipIfAtDestination();
     }
 
@@ -48,5 +47,28 @@ public class MovingObject : MonoBehaviour
     private Vector2 getCurrentDestination()
     {
         return headingToEndElseStart ? endPosition : initialPosition;
+    }
+
+    private void setEndPosition()
+    {
+        long xDelta = 0;
+        long yDelta = 0;
+        switch (direction)
+        {
+            case Direction.North:
+                yDelta = length;
+                break;
+            case Direction.South:
+                yDelta = -length;
+                break;
+            case Direction.East:
+                xDelta = length;
+                break;
+            case Direction.West:
+                xDelta = -length;
+                break;
+        }
+
+        endPosition = new Vector2(transform.position.x + xDelta, transform.position.y + yDelta);
     }
 }
