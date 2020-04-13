@@ -10,24 +10,38 @@ public class Player : MonoBehaviour
 
     // state
     bool isAlive = true;
+    bool isJumping = false;
 
     // cached components
     Rigidbody2D myRigidBody;
     Animator myAnimator;
+    Collider2D myCollider;
+
+    // constants
+    const string ANIMATION_PARAM_IS_JUMPING = "IsJumping";
+    const string ANIMATION_PARAM_IS_FALLING = "IsFalling";
+    const string ANIMATION_PARAM_JUMP_TRIGGER = "Jump";
+    const string ANIMATION_PARAM_LAND_TRIGGER = "Land";
 
     // Start is called before the first frame update
     void Start()
     {
         myRigidBody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
+        myCollider = GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log("Velocity: " + myRigidBody.velocity.x);
         if (isAlive)
         {
             MoveForward();
+            if (isJumping)
+            {
+                HandleLandAnimation();
+            }
         }
     }
 
@@ -37,10 +51,45 @@ public class Player : MonoBehaviour
         myRigidBody.velocity = playerVelocity;
     }
 
+    private void HandleLandAnimation()
+    {
+        //Debug.Log("Velocity: " + myRigidBody.velocity.x);
+        //Debug.Log("Epsilon: " + Mathf.Epsilon);
+
+        if (IsOnGround())
+        {
+            Debug.Log("Land");
+            myAnimator.SetTrigger(ANIMATION_PARAM_LAND_TRIGGER);
+            isJumping = false;
+            
+        }
+
+        //if (myRigidBody.velocity.x < Mathf.Epsilon)
+        //{
+        //    Debug.Log("Jumping");
+        //    myAnimator.SetBool(ANIMATION_PARAM_IS_JUMPING, true);
+        //}
+        //else if (myRigidBody.velocity.x > Mathf.Epsilon)
+        //{
+        //    Debug.Log("Falling");
+        //    myAnimator.SetBool(ANIMATION_PARAM_IS_FALLING, true);
+        //    myAnimator.SetBool(ANIMATION_PARAM_IS_JUMPING, false);
+        //}
+        //else
+        //{
+        //    Debug.Log("Jump Complete");
+        //    myAnimator.SetBool(ANIMATION_PARAM_IS_JUMPING, false);
+        //    myAnimator.SetBool(ANIMATION_PARAM_IS_FALLING, false);
+        //}
+        
+    }
+
     public void Jump(float JumpForce)
     {
         Vector2 playerVelocity = new Vector2(-JumpForce, myRigidBody.velocity.y);
         myRigidBody.velocity = playerVelocity;
+        isJumping = true;
+        myAnimator.SetTrigger(ANIMATION_PARAM_JUMP_TRIGGER);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -70,5 +119,10 @@ public class Player : MonoBehaviour
         myRigidBody.AddForce(deathForce);
         myRigidBody.AddTorque(10);
         
+    }
+
+    private bool IsOnGround()
+    {
+        return (myCollider.IsTouchingLayers(LayerMask.GetMask(Constants.LAYER_FOREGROUND)));
     }
 }
