@@ -6,6 +6,7 @@ public class Constants
 {
     public const string TAG_HAZARD = "Hazard";
     public const string TAG_POWERUP = "Powerup"; // maybe not needed
+    public const string TAG_FOREGROUND = "Foreground";
 
     public const string LAYER_FOREGROUND = "Foreground";
 

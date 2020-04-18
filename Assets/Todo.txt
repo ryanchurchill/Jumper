@@ -32,3 +32,5 @@ Player animation might be a tad janky, possibly due to how sprite is set up
 Fix spring movement
 
 Dispose of objects
+
+Spikes in the ground

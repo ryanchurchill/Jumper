@@ -38,10 +38,10 @@ public class Player : MonoBehaviour
         if (isAlive)
         {
             MoveForward();
-            if (isJumping)
-            {
-                HandleLandAnimation();
-            }
+            //if (isJumping)
+            //{
+            //    HandleLandAnimation();
+            //}
         }
     }
 
@@ -51,37 +51,43 @@ public class Player : MonoBehaviour
         myRigidBody.velocity = playerVelocity;
     }
 
-    private void HandleLandAnimation()
-    {
-        //Debug.Log("Velocity: " + myRigidBody.velocity.x);
-        //Debug.Log("Epsilon: " + Mathf.Epsilon);
+    //private void HandleLandAnimation()
+    //{
+    //    //Debug.Log("Velocity: " + myRigidBody.velocity.x);
+    //    //Debug.Log("Epsilon: " + Mathf.Epsilon);
 
-        if (IsOnGround())
-        {
-            Debug.Log("Land");
-            myAnimator.SetTrigger(ANIMATION_PARAM_LAND_TRIGGER);
-            isJumping = false;
+    //    if (IsOnGround())
+    //    {
+    //        Debug.Log("Land");
             
-        }
+            
+    //    }
 
-        //if (myRigidBody.velocity.x < Mathf.Epsilon)
-        //{
-        //    Debug.Log("Jumping");
-        //    myAnimator.SetBool(ANIMATION_PARAM_IS_JUMPING, true);
-        //}
-        //else if (myRigidBody.velocity.x > Mathf.Epsilon)
-        //{
-        //    Debug.Log("Falling");
-        //    myAnimator.SetBool(ANIMATION_PARAM_IS_FALLING, true);
-        //    myAnimator.SetBool(ANIMATION_PARAM_IS_JUMPING, false);
-        //}
-        //else
-        //{
-        //    Debug.Log("Jump Complete");
-        //    myAnimator.SetBool(ANIMATION_PARAM_IS_JUMPING, false);
-        //    myAnimator.SetBool(ANIMATION_PARAM_IS_FALLING, false);
-        //}
+    //    //if (myRigidBody.velocity.x < Mathf.Epsilon)
+    //    //{
+    //    //    Debug.Log("Jumping");
+    //    //    myAnimator.SetBool(ANIMATION_PARAM_IS_JUMPING, true);
+    //    //}
+    //    //else if (myRigidBody.velocity.x > Mathf.Epsilon)
+    //    //{
+    //    //    Debug.Log("Falling");
+    //    //    myAnimator.SetBool(ANIMATION_PARAM_IS_FALLING, true);
+    //    //    myAnimator.SetBool(ANIMATION_PARAM_IS_JUMPING, false);
+    //    //}
+    //    //else
+    //    //{
+    //    //    Debug.Log("Jump Complete");
+    //    //    myAnimator.SetBool(ANIMATION_PARAM_IS_JUMPING, false);
+    //    //    myAnimator.SetBool(ANIMATION_PARAM_IS_FALLING, false);
+    //    //}
         
+    //}
+
+    private void Land()
+    {
+        Debug.Log("Land");
+        myAnimator.SetTrigger(ANIMATION_PARAM_LAND_TRIGGER);
+        isJumping = false;
     }
 
     public void Jump(float JumpForce)
@@ -121,8 +127,18 @@ public class Player : MonoBehaviour
         
     }
 
-    private bool IsOnGround()
+    //private bool IsOnGround()
+    //{
+    //    return (myCollider.IsTouchingLayers(LayerMask.GetMask(Constants.LAYER_FOREGROUND)));
+        
+    //}
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        return (myCollider.IsTouchingLayers(LayerMask.GetMask(Constants.LAYER_FOREGROUND)));
+        Debug.Log("Collision: " + collision.gameObject.ToString());
+        if (isJumping && collision.gameObject.CompareTag(Constants.TAG_FOREGROUND))
+        {
+            Land();
+        }
     }
 }
