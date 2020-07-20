@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     // constants
     const string ANIMATION_PARAM_JUMP_TRIGGER = "Jump";
     const string ANIMATION_PARAM_LAND_TRIGGER = "Land";
+    const string ANIMATION_STATE_JUMP = "Jump";
 
     // Start is called before the first frame update
     void Start()
@@ -48,7 +49,7 @@ public class Player : MonoBehaviour
 
     private void LandIfNecessary()
     {
-        if (!isStartingJump && IsOnGround() && myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+        if (!isStartingJump && IsOnGround() && myAnimator.GetCurrentAnimatorStateInfo(0).IsName(ANIMATION_STATE_JUMP))
         {
             Debug.Log("Land");
             myAnimator.SetTrigger(ANIMATION_PARAM_LAND_TRIGGER);
@@ -103,6 +104,6 @@ public class Player : MonoBehaviour
 
     private bool IsOnGround()
     {
-        return (myCollider.IsTouchingLayers(LayerMask.GetMask(Constants.LAYER_FOREGROUND)));
+        return (myCollider.IsTouchingLayers(LayerMask.GetMask(Constants.LAYER_GROUND)));
     }
 }
