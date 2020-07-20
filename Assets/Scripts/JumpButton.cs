@@ -28,6 +28,7 @@ public class JumpButton : MonoBehaviour
         {
             state = JumpButtonState.PoweringUp;
             jumpSlider.value = jumpSlider.value + (Time.deltaTime * fillSpeed);
+            player.SetDarkness(jumpSlider.value);
         }
         else
         {

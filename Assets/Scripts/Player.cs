@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     Rigidbody2D myRigidBody;
     Animator myAnimator;
     Collider2D myCollider;
-    AudioSource jumpAudio;
+    SpriteRenderer spriteRenderer;
 
     // constants
     const string ANIMATION_PARAM_JUMP_TRIGGER = "Jump";
@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
         myRigidBody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         myCollider = GetComponent<Collider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -62,7 +63,7 @@ public class Player : MonoBehaviour
 
     public void Jump(float jumpForce)
     {
-        
+        Debug.Log(gameObject.GetComponent<SpriteRenderer>().color);
         Debug.Log("Jump force: " + jumpForce);
         isStartingJump = true;
         jumpSound.volume = jumpForce; // TODO: magic number. 10 is max jumpSlider.value
@@ -71,6 +72,38 @@ public class Player : MonoBehaviour
         myRigidBody.velocity = playerVelocity;
         myAnimator.SetTrigger(ANIMATION_PARAM_JUMP_TRIGGER);
         StartCoroutine(StopStartingJump());
+        SetDarkness(0);
+    }
+
+    /*
+     * darkness: 0-1
+     */
+    public void SetDarkness(float darkness)
+    {
+        /*
+         * Lightest: RGBA(1.000,     1.000, 1.000, 1.000)
+         * Darkest:  RGBA(0.7157331, 0,     1,     1)
+         * 
+         */
+
+        Color lightest = new Color(1, 1, 1);
+        Color darkest = new Color(.7157331f, 0, 1);
+        Color color = Color.Lerp(lightest, darkest, darkness);
+        spriteRenderer.color = color;
+
+        //Vector3 lightest = new Vector3(1, 1, 1);
+        //Vector3 darkest = new Vector3(.7157331f, 0, 1);
+
+        //// 1) Subtract the two vector (B-A) to get a vector pointing from A to B. Lets call this AB
+        //Vector3 aToB = darkest - lightest;
+
+        //// 2) Normalize this vector AB. Now it will be one unit in length.
+        //Vector3 aToBNormalized = aToB.normalized;
+
+        //// 3) You can now scale this vector to find a point between A and B. so (A + (0.1 * AB)) will be 0.1 units from A.
+        //Vector3 newColor = lightest + (darkness * aToBNormalized);
+
+
     }
 
     private IEnumerator StopStartingJump()

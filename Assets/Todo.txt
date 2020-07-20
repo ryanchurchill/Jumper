@@ -36,7 +36,7 @@ Powerup that double speed but gives 5 points
 
 Coins and saws moving together
 
-
+Prevent jumping while still moving left
 
 Level Progression:
 1- coins only
