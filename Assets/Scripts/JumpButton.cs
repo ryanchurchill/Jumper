@@ -24,7 +24,7 @@ public class JumpButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isButtonPressed)
+        if (isButtonPressed && jumpSlider.value < jumpSlider.maxValue)
         {
             state = JumpButtonState.PoweringUp;
             jumpSlider.value = jumpSlider.value + (Time.deltaTime * fillSpeed);

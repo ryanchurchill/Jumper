@@ -6,14 +6,11 @@ Hazards
 
 Maybe: Multiple stories
 
-Death
-- and flow of game
+
 
 Pickups
 
-SFX
-
-Jumping Animation
+Improve SFX
 
 Change player color while preparing jump
 
@@ -22,10 +19,6 @@ Procedurally generated
 Speed increase?
 
 Intro "video" demo
-
-When bar is full, force jump
-
-Some kind of wall to prevent infinite jumping
 
 Player animation might be a tad janky, possibly due to how sprite is set up
 
@@ -41,4 +34,24 @@ Hazards that bounce you back
 
 Powerup that double speed but gives 5 points
 
+Coins and saws moving together
+
+Level Progression:
+1- coins only
+2- coins and saws
+3- more hazards and powerups?
+4- randomizing locations
+5- gradual speed increase
+Saws get bigger?
+Ceiling gradually turns into chainsaws?
+Gradually add chainsaws to ground?
+
+
+DONE
 Stabalize points
+When bar is full, force jump
+Some kind of wall to prevent infinite jumping
+Jumping Animation
+
+Death
+- and flow of game
