@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     // config
     [SerializeField] float MovementSpeed = 1.0f;
+    [SerializeField] float JumpForceMultiplier = 10f;
     [SerializeField] GameSession gameSession;
     [SerializeField] AudioSource jumpSound;
     [SerializeField] AudioSource hazardCollisionSound;
@@ -59,13 +60,14 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Jump(float JumpForce)
+    public void Jump(float jumpForce)
     {
         
-        Debug.Log("Jump");
+        Debug.Log("Jump force: " + jumpForce);
         isStartingJump = true;
+        jumpSound.volume = jumpForce; // TODO: magic number. 10 is max jumpSlider.value
         jumpSound.Play();
-        Vector2 playerVelocity = new Vector2(-JumpForce, myRigidBody.velocity.y);
+        Vector2 playerVelocity = new Vector2(-jumpForce * JumpForceMultiplier, myRigidBody.velocity.y);
         myRigidBody.velocity = playerVelocity;
         myAnimator.SetTrigger(ANIMATION_PARAM_JUMP_TRIGGER);
         StartCoroutine(StopStartingJump());

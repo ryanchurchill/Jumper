@@ -36,6 +36,8 @@ Powerup that double speed but gives 5 points
 
 Coins and saws moving together
 
+
+
 Level Progression:
 1- coins only
 2- coins and saws
@@ -52,6 +54,7 @@ Stabalize points
 When bar is full, force jump
 Some kind of wall to prevent infinite jumping
 Jumping Animation
+Volume of jump contingent on force
 
 Death
 - and flow of game

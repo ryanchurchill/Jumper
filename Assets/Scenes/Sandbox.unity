@@ -2731,7 +2731,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1995132924}
   m_Direction: 1
   m_MinValue: 0
-  m_MaxValue: 10
+  m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -3148,6 +3148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementSpeed: 2
+  JumpForceMultiplier: 10
   gameSession: {fileID: 691140707}
   jumpSound: {fileID: 1078421921}
   hazardCollisionSound: {fileID: 1831778124}
@@ -3491,7 +3492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f337e9242811284e9ceab382ed95cf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fillSpeed: 15
+  fillSpeed: 1.5
   player: {fileID: 1894960638}
   jumpSlider: {fileID: 1679979580}
 --- !u!1 &2134381500

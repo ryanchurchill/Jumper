@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class JumpButton : MonoBehaviour
 {
     // config
-    [SerializeField] float fillSpeed = 1f;
+    [SerializeField] float fillSpeed = .1f;
     // max jump force is defined on slider in editor
     [SerializeField] Player player;
     [SerializeField] Slider jumpSlider;
@@ -24,7 +24,7 @@ public class JumpButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isButtonPressed && jumpSlider.value < jumpSlider.maxValue)
+        if (isButtonPressed && !JumpSliderFull())
         {
             state = JumpButtonState.PoweringUp;
             jumpSlider.value = jumpSlider.value + (Time.deltaTime * fillSpeed);
@@ -43,6 +43,11 @@ public class JumpButton : MonoBehaviour
         player.Jump(jumpSlider.value);
         jumpSlider.value = 0;
         state = JumpButtonState.Waiting;
+    }
+
+    private bool JumpSliderFull()
+    {
+        return jumpSlider.value >= jumpSlider.maxValue - Mathf.Epsilon;
     }
 
     public void onButtonDown()
