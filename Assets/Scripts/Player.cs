@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 
     // state
     bool isAlive = true;
-    bool isJumping = false;
+    bool isStartingJump = false;
 
     // cached components
     Rigidbody2D myRigidBody;
@@ -42,6 +42,11 @@ public class Player : MonoBehaviour
             //{
             //    HandleLandAnimation();
             //}
+
+            if (!isStartingJump && IsOnGround() && myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+            {
+                Land();
+            }
         }
     }
 
@@ -59,8 +64,8 @@ public class Player : MonoBehaviour
     //    if (IsOnGround())
     //    {
     //        Debug.Log("Land");
-            
-            
+
+
     //    }
 
     //    //if (myRigidBody.velocity.x < Mathf.Epsilon)
@@ -80,22 +85,40 @@ public class Player : MonoBehaviour
     //    //    myAnimator.SetBool(ANIMATION_PARAM_IS_JUMPING, false);
     //    //    myAnimator.SetBool(ANIMATION_PARAM_IS_FALLING, false);
     //    //}
-        
+
     //}
 
     private void Land()
     {
-        Debug.Log("Land");
-        myAnimator.SetTrigger(ANIMATION_PARAM_LAND_TRIGGER);
-        isJumping = false;
+        //if (myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+        //{
+            Debug.Log("Land");
+            myAnimator.SetTrigger(ANIMATION_PARAM_LAND_TRIGGER);
+        //}
+
     }
 
     public void Jump(float JumpForce)
     {
+        
+        Debug.Log("Jump");
+        isStartingJump = true;
         Vector2 playerVelocity = new Vector2(-JumpForce, myRigidBody.velocity.y);
         myRigidBody.velocity = playerVelocity;
-        isJumping = true;
         myAnimator.SetTrigger(ANIMATION_PARAM_JUMP_TRIGGER);
+        StartCoroutine(StopStartingJump());
+    }
+
+    private bool isJumpingUp()
+    {
+        Debug.Log("Velocity: " + myRigidBody.velocity.x);
+        return (myRigidBody.velocity.x < Mathf.Epsilon);
+    }
+
+    private IEnumerator StopStartingJump()
+    {
+        yield return new WaitForSeconds(.5f); // TODO: better estimate based on force
+        isStartingJump = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -127,18 +150,20 @@ public class Player : MonoBehaviour
         
     }
 
-    //private bool IsOnGround()
-    //{
-    //    return (myCollider.IsTouchingLayers(LayerMask.GetMask(Constants.LAYER_FOREGROUND)));
-        
-    //}
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private bool IsOnGround()
     {
-        Debug.Log("Collision: " + collision.gameObject.ToString());
-        if (isJumping && collision.gameObject.CompareTag(Constants.TAG_FOREGROUND))
-        {
-            Land();
-        }
+        return (myCollider.IsTouchingLayers(LayerMask.GetMask(Constants.LAYER_FOREGROUND)));
     }
+
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    Debug.Log("Collision1: " + collision.gameObject.ToString());
+    //    //if (isJumping && collision.gameObject.CompareTag(Constants.TAG_FOREGROUND))
+    //    //if (!isJumpingUp() && collision.gameObject.CompareTag(Constants.TAG_FOREGROUND))
+    //    if (collision.gameObject.CompareTag(Constants.TAG_FOREGROUND))
+    //    {
+    //        Debug.Log("Collision2: " + collision.gameObject.ToString());
+    //        Land();
+    //    }
+    //}
 }
