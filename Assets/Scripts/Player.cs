@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     // config
     [SerializeField] float MovementSpeed = 1.0f;
     [SerializeField] GameSession gameSession;
+    [SerializeField] AudioSource jumpSound;
+    [SerializeField] AudioSource hazardCollisionSound;
 
     // state
     bool isAlive = true;
@@ -16,6 +18,7 @@ public class Player : MonoBehaviour
     Rigidbody2D myRigidBody;
     Animator myAnimator;
     Collider2D myCollider;
+    AudioSource jumpAudio;
 
     // constants
     const string ANIMATION_PARAM_JUMP_TRIGGER = "Jump";
@@ -61,6 +64,7 @@ public class Player : MonoBehaviour
         
         Debug.Log("Jump");
         isStartingJump = true;
+        jumpSound.Play();
         Vector2 playerVelocity = new Vector2(-JumpForce, myRigidBody.velocity.y);
         myRigidBody.velocity = playerVelocity;
         myAnimator.SetTrigger(ANIMATION_PARAM_JUMP_TRIGGER);
@@ -92,6 +96,7 @@ public class Player : MonoBehaviour
     private void Die(Vector2 deathForce)
     {
         Debug.Log("die");
+        hazardCollisionSound.Play();
         isAlive = false;
         gameSession.PlayerDied();
 
