@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class JumpButton : MonoBehaviour
 {
     // config
-    [SerializeField] float fillSpeed = .1f;
+    [SerializeField] float fillSpeed = 1f;
     // max jump force is defined on slider in editor
     [SerializeField] Player player;
     [SerializeField] Slider jumpSlider;
