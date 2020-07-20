@@ -9,14 +9,14 @@ public class GameSession : MonoBehaviour
 {
     // config
     [SerializeField] TextMeshProUGUI scoreText;
-    [SerializeField] float scorePerSecond = 1.0f;
+    [SerializeField] float scorePerSecond = 0f;
     [SerializeField] int updateDisplayAfterMs = 1000;
     [SerializeField] Player player;
     [SerializeField] GameObject deathPanel;
 
     // state
     bool isPlayerAlive = true;
-    float score = 0;
+    [SerializeField] float score = 0;
     DateTime timeOfLastScoreDisplayUpdate = DateTime.Now;
 
     // Start is called before the first frame update

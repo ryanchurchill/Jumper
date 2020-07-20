@@ -34,3 +34,11 @@ Fix spring movement
 Dispose of objects
 
 Spikes in the ground
+
+Powerup is hacky - can't put session and sound in prefab
+
+Hazards that bounce you back
+
+Powerup that double speed but gives 5 points
+
+Stabalize points

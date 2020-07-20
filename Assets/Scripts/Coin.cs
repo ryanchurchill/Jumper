@@ -5,7 +5,7 @@ using UnityEngine;
 public class Coin : Powerup
 {
     // config
-    [SerializeField] int value = 100;
+    [SerializeField] int value = 1;
 
     protected override void ApplyPowerup(Player player)
     {

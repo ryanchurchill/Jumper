@@ -166,4 +166,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   session: {fileID: 0}
   pickupSound: {fileID: 0}
-  value: 1000
+  value: 1
