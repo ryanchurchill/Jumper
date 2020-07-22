@@ -6,7 +6,7 @@ public class WallToWallMovement : MonoBehaviour
 {
     // config
     [SerializeField] Direction direction = Direction.West;
-    [SerializeField] long speed = 1;
+    [SerializeField] long speed = 100;
 
     // state
 
