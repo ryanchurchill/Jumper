@@ -18,7 +18,7 @@ public class WallToWallMovement : MonoBehaviour
     {
         myRigidBody = GetComponentInParent<Rigidbody2D>();
 
-        myRigidBody.AddForce(new Vector2(-speed, 0));
+        AddForceInDirection();
     }
 
     // Update is called once per frame
