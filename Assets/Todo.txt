@@ -1,5 +1,13 @@
 Resolution: Iphone7 (750x1334)
 
+Grid has 4 playable squares per row
+Coin X positions (right to left):
+- Row1:  1.5
+- Row2:  0.5
+- Row3: -0.5 
+- Row4: -1.5
+Y position: -4.5 + row number (bottom to top)
+
 Hazards
 - can walk on top of them?
 - Moving hazards? (e.g. chainsaws coming atcha)

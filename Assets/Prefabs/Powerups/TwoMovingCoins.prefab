@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5616497309029906151}
   - component: {fileID: 5616497309029906168}
   m_Layer: 11
-  m_Name: TwoCoinsMiddleSaw
+  m_Name: TwoMovingCoins
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,7 +69,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.4984787, y: -0.00055122375}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -80,7 +80,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.9535846, y: 0.5004406}
+  m_Size: {x: 2.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &5616497309029906168
 MonoBehaviour:
@@ -111,7 +111,7 @@ PrefabInstance:
     - target: {fileID: 2970494967418224698, guid: fd90c478efe851a4d84703d80de1c451,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.22
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2970494967418224698, guid: fd90c478efe851a4d84703d80de1c451,
         type: 3}
@@ -197,7 +197,7 @@ PrefabInstance:
     - target: {fileID: 2970494967418224698, guid: fd90c478efe851a4d84703d80de1c451,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.22
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2970494967418224698, guid: fd90c478efe851a4d84703d80de1c451,
         type: 3}
