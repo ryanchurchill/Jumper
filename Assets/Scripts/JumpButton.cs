@@ -24,6 +24,7 @@ public class JumpButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (player.jumpState == JumpState.JUMPING) { return; }
         if (isButtonPressed && !JumpSliderFull())
         {
             state = JumpButtonState.PoweringUp;

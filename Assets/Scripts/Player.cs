@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum JumpState
+{
+    JUMPING,
+    FALLING,
+    WALKING
+}
+
 public class Player : MonoBehaviour
 {
     // config
@@ -11,10 +18,11 @@ public class Player : MonoBehaviour
     [SerializeField] AudioSource jumpSound;
     [SerializeField] AudioSource hazardCollisionSound;
     [SerializeField] AudioSource ceilingCollisionSound;
+    [SerializeField] AudioSource landOnFloorSound;
 
     // state
     bool isAlive = true;
-    bool isStartingJump = false;
+    public JumpState jumpState = JumpState.WALKING;
 
     // cached components
     Rigidbody2D myRigidBody;
@@ -39,11 +47,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("Velocity: " + myRigidBody.velocity.x);
         if (isAlive)
         {
             MoveForward();
-            LandIfNecessary();
+            JumpToFallTransition();
         }
     }
 
@@ -53,26 +60,39 @@ public class Player : MonoBehaviour
         myRigidBody.velocity = playerVelocity;
     }
 
-    private void LandIfNecessary()
+    private void JumpToFallTransition()
     {
-        if (!isStartingJump && IsOnGround() && myAnimator.GetCurrentAnimatorStateInfo(0).IsName(ANIMATION_STATE_JUMP))
+        if (jumpState == JumpState.JUMPING && myRigidBody.velocity.x > Mathf.Epsilon)
         {
-            Debug.Log("Land");
-            myAnimator.SetTrigger(ANIMATION_PARAM_LAND_TRIGGER);
+            Debug.Log("Falling");
+            jumpState = JumpState.FALLING;
         }
     }
 
+    private void Land()
+    {
+        Debug.Log("Land");
+        jumpState = JumpState.WALKING;
+        myAnimator.SetTrigger(ANIMATION_PARAM_LAND_TRIGGER);
+        landOnFloorSound.Play();
+    }
+
+    // jumpForce is 0-1
     public void Jump(float jumpForce)
     {
-        Debug.Log(gameObject.GetComponent<SpriteRenderer>().color);
         Debug.Log("Jump force: " + jumpForce);
-        isStartingJump = true;
-        jumpSound.volume = jumpForce; // TODO: magic number. 10 is max jumpSlider.value
+        jumpState = JumpState.JUMPING;
+        jumpSound.volume = jumpForce;
         jumpSound.Play();
-        Vector2 playerVelocity = new Vector2(-jumpForce * JumpForceMultiplier, myRigidBody.velocity.y);
+
+        // playing with velocity so that a jump when the player is already moving up will not cause it to stop
+        float currentXVelocity = myRigidBody.velocity.x;
+        float newTargetVelocty = -jumpForce * JumpForceMultiplier;
+        float newVelocity = Mathf.Clamp(newTargetVelocty + Mathf.Clamp(currentXVelocity, -JumpForceMultiplier, 0), -JumpForceMultiplier, 0);
+
+        Vector2 playerVelocity = new Vector2(newVelocity, myRigidBody.velocity.y);
         myRigidBody.velocity = playerVelocity;
         myAnimator.SetTrigger(ANIMATION_PARAM_JUMP_TRIGGER);
-        StartCoroutine(StopStartingJump());
         SetDarkness(0);
     }
 
@@ -93,12 +113,6 @@ public class Player : MonoBehaviour
         spriteRenderer.color = color;
     }
 
-    private IEnumerator StopStartingJump()
-    {
-        yield return new WaitForSeconds(.1f); // TODO: better estimate based on force
-        isStartingJump = false;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Hazard hazard = collision.GetComponent<Hazard>();
@@ -117,7 +131,7 @@ public class Player : MonoBehaviour
 
     private void Die(Vector2 deathForce)
     {
-        Debug.Log("die");
+        //Debug.Log("die");
         hazardCollisionSound.Play();
         isAlive = false;
         gameSession.PlayerDied();
@@ -136,10 +150,19 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //Debug.Log("Colliding with " + collision.gameObject.name);
+        //Debug.Log(myRigidBody.velocity.x);
         if (collision.gameObject.tag == Constants.TAG_CEILING)
         {
             Debug.Log("Hit Ceiling");
             ceilingCollisionSound.Play();
+        }
+        else if (collision.gameObject.tag == Constants.TAG_GROUND)
+        {
+            if (jumpState == JumpState.FALLING)
+            {
+                Land();
+            }
         }
     }
 }

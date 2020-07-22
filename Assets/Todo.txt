@@ -36,7 +36,8 @@ Powerup that double speed but gives 5 points
 
 Coins and saws moving together
 
-Prevent jumping while still moving left
+
+
 
 Level Progression:
 1- coins only
@@ -48,6 +49,7 @@ Saws get bigger?
 Ceiling gradually turns into chainsaws?
 Gradually add chainsaws to ground?
 
+Collision volumes based on force of collision
 
 DONE
 Stabalize points
@@ -55,6 +57,8 @@ When bar is full, force jump
 Some kind of wall to prevent infinite jumping
 Jumping Animation
 Volume of jump contingent on force
+Prevent jumping while still moving left
+Still improvements to make to handling land animation / sound
 
 Death
 - and flow of game
