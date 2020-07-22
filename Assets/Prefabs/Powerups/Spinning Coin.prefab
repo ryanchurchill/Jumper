@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2970494967418224708}
   - component: {fileID: 2970494967418224699}
   - component: {fileID: 2970494967418224709}
-  - component: {fileID: 2970494967418224710}
   - component: {fileID: 2970494967418224711}
+  - component: {fileID: 6933152763712886560}
   m_Layer: 0
   m_Name: Spinning Coin
   m_TagString: Powerup
@@ -126,7 +126,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &2970494967418224710
+--- !u!114 &2970494967418224711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2970494967418224697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45409dc7c459ebf4389e831c243e4b1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  session: {fileID: 0}
+  pickupSound: {fileID: 0}
+  value: 1
+--- !u!61 &6933152763712886560
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,18 +167,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &2970494967418224711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2970494967418224697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45409dc7c459ebf4389e831c243e4b1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  session: {fileID: 0}
-  pickupSound: {fileID: 0}
-  value: 1

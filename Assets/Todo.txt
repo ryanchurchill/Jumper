@@ -12,8 +12,6 @@ Pickups
 
 Improve SFX
 
-Change player color while preparing jump
-
 Procedurally generated
 
 Speed increase?
@@ -36,12 +34,14 @@ Powerup that double speed but gives 5 points
 
 Coins and saws moving together
 
-
+Better falling animation?
 
 
 Level Progression:
 1- coins only
-2- coins and saws
+ - moving coins
+2- static coins and saws
+ - moving coins and saws
 3- more hazards and powerups?
 4- randomizing locations
 5- gradual speed increase
@@ -59,6 +59,7 @@ Jumping Animation
 Volume of jump contingent on force
 Prevent jumping while still moving left
 Still improvements to make to handling land animation / sound
+Change player color while preparing jump
 
 Death
 - and flow of game
