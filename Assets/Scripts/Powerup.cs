@@ -6,12 +6,10 @@ public abstract class Powerup : MonoBehaviour
 {
     // config
     [SerializeField] protected GameSession session;
-    [SerializeField] AudioSource pickupSound;
 
     public void CollectPowerup(Player player)
     {
         ApplyPowerup(player);
-        pickupSound.Play();
         Destroy(gameObject);
     }
 

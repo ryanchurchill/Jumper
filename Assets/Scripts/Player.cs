@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     [SerializeField] AudioSource hazardCollisionSound;
     [SerializeField] AudioSource ceilingCollisionSound;
     [SerializeField] AudioSource landOnFloorSound;
+    [SerializeField] AudioSource pickupCoinSound;
 
     // state
     bool isAlive = true;
@@ -125,6 +126,7 @@ public class Player : MonoBehaviour
             if (powerup)
             {
                 powerup.CollectPowerup(this);
+                pickupCoinSound.Play();
             }
         }
     }

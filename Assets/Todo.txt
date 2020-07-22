@@ -36,6 +36,8 @@ Coins and saws moving together
 
 Better falling animation?
 
+Cleanup audio on death
+
 
 Level Progression:
 1- coins only
