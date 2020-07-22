@@ -7,6 +7,14 @@ public abstract class Powerup : MonoBehaviour
     // config
     [SerializeField] protected GameSession session;
 
+    private void Start()
+    {
+        if (!session)
+        {
+            session = FindObjectOfType<GameSession>();
+        }
+    }
+
     public void CollectPowerup(Player player)
     {
         ApplyPowerup(player);

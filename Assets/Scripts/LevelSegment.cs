@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelSegment : MonoBehaviour
 {
-    const float SegmentSize = 15;
+    [SerializeField] float SegmentSize = 15;
     bool HasSpawnedNextSegment = false;
     LevelSegment PriorSegment;
 

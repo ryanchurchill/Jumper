@@ -38,6 +38,8 @@ Better falling animation?
 
 Cleanup audio on death
 
+Audio either choppy or lagged
+
 
 Level Progression:
 1- coins only
