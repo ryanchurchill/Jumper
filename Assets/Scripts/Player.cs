@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameSession gameSession;
     [SerializeField] AudioSource jumpSound;
     [SerializeField] AudioSource hazardCollisionSound;
+    [SerializeField] AudioSource ceilingCollisionSound;
 
     // state
     bool isAlive = true;
@@ -90,20 +91,6 @@ public class Player : MonoBehaviour
         Color darkest = new Color(.7157331f, 0, 1);
         Color color = Color.Lerp(lightest, darkest, darkness);
         spriteRenderer.color = color;
-
-        //Vector3 lightest = new Vector3(1, 1, 1);
-        //Vector3 darkest = new Vector3(.7157331f, 0, 1);
-
-        //// 1) Subtract the two vector (B-A) to get a vector pointing from A to B. Lets call this AB
-        //Vector3 aToB = darkest - lightest;
-
-        //// 2) Normalize this vector AB. Now it will be one unit in length.
-        //Vector3 aToBNormalized = aToB.normalized;
-
-        //// 3) You can now scale this vector to find a point between A and B. so (A + (0.1 * AB)) will be 0.1 units from A.
-        //Vector3 newColor = lightest + (darkness * aToBNormalized);
-
-
     }
 
     private IEnumerator StopStartingJump()
@@ -145,5 +132,14 @@ public class Player : MonoBehaviour
     private bool IsOnGround()
     {
         return (myCollider.IsTouchingLayers(LayerMask.GetMask(Constants.LAYER_GROUND)));
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == Constants.TAG_CEILING)
+        {
+            Debug.Log("Hit Ceiling");
+            ceilingCollisionSound.Play();
+        }
     }
 }
